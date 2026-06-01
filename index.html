@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacons AI Foundry — Build. Learn. Innovate. Win.</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #F8FAFC;
+            --bg2: #F1F5F9;
+            --bg3: #E2E8F0;
+            --primary: #004BFF;
+            --secondary: #9B51E0;
+            --accent: #FFDF00;
+            --glow1: #004BFF;
+            --glow2: #9B51E0;
+            --text: #0F172A;
+            --muted: #475569;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(0, 75, 255, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6
+        }
+
+        /* ─── CANVAS ─── */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border)
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+            background: linear-gradient(135deg, #fff, var(--glow1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s
+        }
+
+        .nav-links a:hover {
+            color: var(--text)
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            padding: 0.55rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s
+        }
+
+        .nav-cta:hover {
+            opacity: 0.85;
+            transform: translateY(-1px)
+        }
+
+        /* ─── HERO ─── */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            overflow: hidden;
+            padding: 6rem 1rem 4rem
+        }
+
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none
+        }
+
+        .nebula-1 {
+            width: 700px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(79, 70, 229, 0.18) 0%, transparent 70%);
+            top: -100px;
+            left: -200px
+        }
+
+        .nebula-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+            top: 100px;
+            right: -150px
+        }
+
+        .nebula-3 {
+            width: 500px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease both
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 6px var(--accent);
+            animation: pulse 2s infinite
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            position: relative;
+            animation: fadeUp 0.9s 0.1s ease both
+        }
+
+        .hero-title span {
+            display: block
+        }
+
+        .shine-wrap {
+            position: relative;
+            display: inline-block;
+            overflow: hidden
+        }
+
+        .shine-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+            animation: shine 4s 1.5s infinite linear;
+            pointer-events: none
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%
+            }
+
+            100% {
+                left: 200%
+            }
+        }
+
+        .grad-text {
+            background: linear-gradient(135deg, #fff 0%, var(--glow1) 40%, var(--glow2) 70%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .hero-tagline {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 500;
+            color: var(--glow1);
+            letter-spacing: 0.15em;
+            text-align: center;
+            margin-top: 1rem;
+            animation: fadeUp 0.9s 0.2s ease both
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--muted);
+            text-align: center;
+            max-width: 580px;
+            margin: 1.5rem auto 0;
+            line-height: 1.8;
+            animation: fadeUp 0.9s 0.3s ease both
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeUp 0.9s 0.4s ease both
+        }
+
+        .btn-primary {
+            position: relative;
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(79, 70, 229, 0.6)
+        }
+
+        .btn-secondary {
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(168, 85, 247, 0.1));
+            opacity: 0;
+            transition: opacity 0.2s
+        }
+
+        .btn-secondary:hover::before {
+            opacity: 1
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px)
+        }
+
+        /* ─── FLOATING LOGOS ─── */
+        .ecosystem {
+            position: absolute;
+            inset: 0;
+            pointer-events: none
+        }
+
+        .eco-logo {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            background: rgba(6, 8, 22, 0.6);
+            backdrop-filter: blur(16px);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            animation: floatLogo var(--dur, 6s) var(--del, 0s) ease-in-out infinite alternate;
+            white-space: nowrap
+        }
+
+        .eco-logo .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        @keyframes floatLogo {
+            0% {
+                transform: translateY(0) rotate(0deg)
+            }
+
+            100% {
+                transform: translateY(-18px) rotate(1deg)
+            }
+        }
+
+        .eco-logo:nth-child(1) {
+            top: 22%;
+            left: 6%;
+            --dur: 7s;
+            --del: 0s
+        }
+
+        .eco-logo:nth-child(2) {
+            top: 38%;
+            left: 4%;
+            --dur: 6s;
+            --del: 1s
+        }
+
+        .eco-logo:nth-child(3) {
+            top: 54%;
+            left: 8%;
+            --dur: 8s;
+            --del: 0.5s
+        }
+
+        .eco-logo:nth-child(4) {
+            top: 68%;
+            left: 5%;
+            --dur: 6.5s;
+            --del: 1.5s
+        }
+
+        .eco-logo:nth-child(5) {
+            top: 22%;
+            right: 6%;
+            --dur: 7.5s;
+            --del: 0.3s
+        }
+
+        .eco-logo:nth-child(6) {
+            top: 38%;
+            right: 4%;
+            --dur: 6s;
+            --del: 0.8s
+        }
+
+        .eco-logo:nth-child(7) {
+            top: 54%;
+            right: 8%;
+            --dur: 7s;
+            --del: 1.2s
+        }
+
+        .eco-logo:nth-child(8) {
+            top: 68%;
+            right: 5%;
+            --dur: 6.5s;
+            --del: 0.2s
+        }
+
+        /* SVG connector canvas */
+        #eco-lines {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3
+        }
+
+
+        /* ─── SECTION FRAMEWORK ─── */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 6rem 2rem
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(135deg, var(--glow1), var(--glow2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .section-desc {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 600px;
+            line-height: 1.8
+        }
+
+        /* ─── GLASS CARDS ─── */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15)
+        }
+
+        /* ─── DOMAIN CHIPS ─── */
+        .domains {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.5rem
+        }
+
+        .domain-chip {
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--muted);
+            transition: all 0.2s;
+            cursor: default
+        }
+
+        .domain-chip:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.2)
+        }
+
+        /* ─── BOOTCAMP CARDS ─── */
+        .bootcamp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem
+        }
+
+        .bootcamp-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s
+        }
+
+        .bootcamp-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(168, 85, 247, 0.06));
+            opacity: 0;
+            transition: opacity 0.3s
+        }
+
+        .bootcamp-card:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.2)
+        }
+
+        .bootcamp-card:hover::before {
+            opacity: 1
+        }
+
+        .bc-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1rem
+        }
+
+        .bc-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            line-height: 1.3
+        }
+
+        .bc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem
+        }
+
+        .bc-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--muted);
+            font-size: 0.9rem
+        }
+
+        .bc-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+            box-shadow: 0 0 6px var(--accent)
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline {
+            position: relative;
+            max-width: 480px;
+            margin: 3rem auto 0
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--accent));
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4)
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 1rem 0;
+            position: relative
+        }
+
+        .tl-node {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg3);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s;
+            z-index: 1
+        }
+
+        .tl-node:hover {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            border-color: var(--secondary)
+        }
+
+        .tl-content {
+            padding-top: 0.6rem
+        }
+
+        .tl-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem
+        }
+
+        .tl-desc {
+            font-size: 0.85rem;
+            color: var(--muted)
+        }
+
+        /* ─── VENUE CARD ─── */
+        .venue-card {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(168, 85, 247, 0.08));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .venue-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(79, 70, 229, 0.05) 60deg, transparent 120deg);
+            animation: rotateConic 12s linear infinite
+        }
+
+        @keyframes rotateConic {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .venue-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 1rem
+        }
+
+        .venue-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem
+        }
+
+        .venue-sub {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem
+        }
+
+        .venue-tba {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.1);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary)
+        }
+
+        /* ─── MODE CARDS ─── */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem
+        }
+
+        .mode-card {
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: default
+        }
+
+        .mode-card.online {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(96, 165, 250, 0.06));
+            border: 1px solid rgba(6, 182, 212, 0.2)
+        }
+
+        .mode-card.offline {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(79, 70, 229, 0.06));
+            border: 1px solid rgba(168, 85, 247, 0.2)
+        }
+
+        .mode-card:hover {
+            transform: translateY(-6px)
+        }
+
+        .mode-card.online:hover {
+            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.15)
+        }
+
+        .mode-card.offline:hover {
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.15)
+        }
+
+        .mode-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem
+        }
+
+        .mode-icon.online {
+            background: rgba(6, 182, 212, 0.15)
+        }
+
+        .mode-icon.offline {
+            background: rgba(168, 85, 247, 0.15)
+        }
+
+        .mode-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem
+        }
+
+        .mode-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem
+        }
+
+        .mode-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--muted);
+            font-size: 0.875rem
+        }
+
+        .check {
+            color: var(--accent);
+            font-size: 0.8rem
+        }
+
+        /* ─── PRIZES ─── */
+        #prizes {
+            text-align: center
+        }
+
+        .trophy {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5));
+            animation: trophyFloat 3s ease-in-out infinite alternate
+        }
+
+        @keyframes trophyFloat {
+            0% {
+                transform: translateY(0) scale(1)
+            }
+
+            100% {
+                transform: translateY(-12px) scale(1.04)
+            }
+        }
+
+        .prizes-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem
+        }
+
+        .prize-chip {
+            padding: 0.7rem 1.5rem;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s
+        }
+
+        .prize-chip:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            color: var(--secondary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
+            transform: translateY(-2px)
+        }
+
+        /* ─── BENEFITS ─── */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2.5rem
+        }
+
+        .benefit-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s
+        }
+
+        .benefit-card:hover {
+            border-color: rgba(96, 165, 250, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(96, 165, 250, 0.1)
+        }
+
+        .benefit-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem
+        }
+
+        .benefit-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem
+        }
+
+        .benefit-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        /* ─── FAQ ─── */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 780px;
+            margin: 2.5rem auto 0
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--glass-border)
+        }
+
+        .faq-q {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text);
+            text-align: left;
+            padding: 1.3rem 0;
+            font-size: 0.975rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.2s
+        }
+
+        .faq-q:hover {
+            color: var(--glow1)
+        }
+
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            transition: all 0.3s
+        }
+
+        .faq-item.open .faq-icon {
+            border-color: var(--primary);
+            background: var(--primary);
+            transform: rotate(45deg)
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.8
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding-bottom: 1.2rem
+        }
+
+        /* ─── FINAL CTA ─── */
+        #final-cta {
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            padding: 8rem 2rem
+        }
+
+        .cta-aurora {
+            position: absolute;
+            inset: 0;
+            overflow: hidden
+        }
+
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: auroraMove var(--d, 10s) ease-in-out infinite alternate
+        }
+
+        .aurora-blob:nth-child(1) {
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, #4F46E5, transparent 70%);
+            top: -100px;
+            left: -100px;
+            --d: 12s
+        }
+
+        .aurora-blob:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse, #8B5CF6, transparent 70%);
+            bottom: -100px;
+            right: -100px;
+            --d: 9s
+        }
+
+        .aurora-blob:nth-child(3) {
+            width: 400px;
+            height: 300px;
+            background: radial-gradient(ellipse, #06B6D4, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            --d: 11s
+        }
+
+        @keyframes auroraMove {
+            0% {
+                transform: scale(1) translate(0, 0)
+            }
+
+            100% {
+                transform: scale(1.2) translate(30px, -20px)
+            }
+        }
+
+        .cta-blob:nth-child(3) {
+            transform: translate(-50%, -50%);
+            animation: auroraMove 11s ease-in-out infinite alternate
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1
+        }
+
+        .cta-heading {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.2rem
+        }
+
+        .cta-sub {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 2rem 2rem;
+            background: rgba(3, 7, 18, 0.8)
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            line-height: 1.7
+        }
+
+        .footer-col h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem
+        }
+
+        .footer-col ul li a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--text)
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--muted)
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #fff, var(--glow1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .footer-tagline {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem
+        }
+
+        /* ─── DIVIDER ─── */
+        .gradient-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
+            margin: 0 2rem;
+            position: relative;
+            z-index: 1
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.4
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media(max-width:768px) {
+            nav {
+                padding: 1rem 1.25rem
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(248, 250, 252, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                border-bottom: 2.5px solid var(--text-dark);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.3s ease-in-out;
+            }
+            
+            nav.nav-open .nav-links {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .nav-cta {
+                display: none
+            }
+
+            .eco-logo {
+                display: none
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .footer-inner>:first-child {
+                grid-column: 1/-1
+            }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- STARFIELD CANVAS -->
+    <canvas id="starfield"></canvas>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">
+            <img src="/new_logo.png" alt="Beacon's AI Foundry Hackathon" class="nav-logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#timeline" onclick="document.querySelector('nav').classList.remove('nav-open')">Timeline</a></li>
+            <li><a href="#module1" onclick="document.querySelector('nav').classList.remove('nav-open')">Phase 1</a></li>
+            <li><a href="#module2" onclick="document.querySelector('nav').classList.remove('nav-open')">Phase 2</a></li>
+            <li><a href="#prizes" onclick="document.querySelector('nav').classList.remove('nav-open')">Prizes</a></li>
+        </ul>
+        <button class="nav-cta">Register Now</button>
+        <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="document.querySelector('nav').classList.toggle('nav-open')">☰</button>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section id="hero">
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+
+        <!-- Logo image as hero centerpiece -->
+        <div class="hero-logo-wrapper">
+            <img src="/new_logo.png" alt="Beacon's AI Foundry Hackathon 2K26 — Hack the Future" class="hero-logo-img">
+        </div>
+
+
+
+
+        <p class="hero-sub" style="max-width: 800px;">Welcome to Beacon's AI Foundry 2K26, a 24-hour innovation-focused hackathon organized by Beacon Technologies and co-organized by DevCatalyst.<br><br>Join 300+ innovators, developers, AI enthusiasts, cybersecurity professionals, researchers, robotics builders, and problem-solvers as they come together to create impactful solutions for real-world challenges.</p>
+
+        <div class="hero-btns">
+            <button class="btn-primary">🚀 Register Now</button>
+        </div>
+
+
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ TIMELINE ═══════════════ -->
+    <section id="timeline">
+        <div class="container">
+            <div style="text-align:center;">
+                <p class="section-label reveal">Journey Roadmap</p>
+                <h2 class="section-title reveal">Hackathon <span class="highlight">Timeline</span></h2>
+            </div>
+            <div class="timeline" style="margin-top:2rem">
+                <div class="tl-item reveal">
+                    <div class="tl-node">📋</div>
+                    <div class="tl-content">
+                        <div class="tl-title">Problem Statement Submission</div>
+                        <div class="tl-desc">Identify and submit real-world challenges across domains</div>
+                    </div>
+                </div>
+                <div class="tl-item reveal">
+                    <div class="tl-node">🧠</div>
+                    <div class="tl-content">
+                        <div class="tl-title">Bootcamp 1</div>
+                        <div class="tl-desc">AI foundations, problem discovery, validation</div>
+                    </div>
+                </div>
+                <div class="tl-item reveal">
+                    <div class="tl-node">🛠️</div>
+                    <div class="tl-content">
+                        <div class="tl-title">Bootcamp 2</div>
+                        <div class="tl-desc">Build AI products and prepare your pitch</div>
+                    </div>
+                </div>
+                <div class="tl-item reveal">
+                    <div class="tl-node" style="border-color:var(--accent);box-shadow:0 0 20px rgba(6,182,212,0.4)">🏆</div>
+                    <div class="tl-content">
+                        <div class="tl-title" style="color:var(--accent)">Grand Finale</div>
+                        <div class="tl-desc">Offline hackathon — build your solution, pitch, and win</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ PHASE 1 ═══════════════ -->
+    <section id="module1">
+        <div class="container">
+            <p class="section-label reveal">Phase One</p>
+            <h2 class="section-title reveal">Phase 1 — <span class="highlight">Domain Selection & Bootcamps</span></h2>
+            <p class="section-desc reveal">Pick your domain, form your team, and level up with hands-on bootcamps before the grand build.</p>
+
+            <!-- Hackathon Domains Card -->
+            <div class="glass-card reveal" style="margin-top:2.5rem">
+                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.2rem">
+                    <span style="font-size:1.4rem">🎯</span>
+                    <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700">Hackathon Domains</h3>
+                </div>
+                <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.5rem">Build solutions in any of these domains:</p>
+                <div class="domains">
+                    <span class="domain-chip">🤖 Agentic AI</span>
+                    <span class="domain-chip">🦾 VLA / Robotics</span>
+                    <span class="domain-chip">🔐 Cybersecurity</span>
+                    <span class="domain-chip">👁️ Computer Vision</span>
+                    <span class="domain-chip">🔓 Open Innovation</span>
+                </div>
+            </div>
+
+            <!-- Bootcamp Cards -->
+            <div class="bootcamp-grid">
+                <div class="bootcamp-card reveal">
+                    <div class="bc-num">Bootcamp 01</div>
+                    <h3 class="bc-title">Vibe Coding, Git & GitHub</h3>
+                    <ul class="bc-list">
+                        <li>Introduction to vibe coding workflows</li>
+                        <li>Git fundamentals — branching, merging & collaboration</li>
+                        <li>GitHub repositories, PRs & project management</li>
+                        <li>Building & shipping code as a team</li>
+                    </ul>
+                </div>
+                <div class="bootcamp-card reveal" style="animation-delay:0.1s">
+                    <div class="bc-num" style="color:var(--secondary)">Bootcamp 02</div>
+                    <h3 class="bc-title">Agentic AI</h3>
+                    <ul class="bc-list">
+                        <li>Understanding AI agents & autonomous workflows</li>
+                        <li>Building agentic systems with LLMs</li>
+                        <li>Tool use, planning & multi-step reasoning</li>
+                        <li>Real-world agentic AI applications</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ PHASE 2 ═══════════════ -->
+    <section id="module2">
+        <div class="container">
+            <p class="section-label reveal">Phase Two</p>
+            <h2 class="section-title reveal">Phase 2 — Grand <span class="highlight">Finale</span></h2>
+            <p class="section-desc reveal">Selected participants advance to the final offline hackathon — the ultimate
+                test of creativity, skill, and innovation.</p>
+
+            <div class="venue-card reveal" style="margin-top:2.5rem">
+                <div class="venue-label">📍 Event Venue</div>
+                <h3 class="venue-title">Offline Hackathon Experience</h3>
+                <p class="venue-sub">An immersive, hands-on environment where selected participants come together to
+                    build groundbreaking AI solutions over an intense hackathon period.</p>
+                <div class="venue-tba">🗺️ Venue To Be Announced</div>
+                <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2rem">
+                    <span class="domain-chip" style="font-size:0.85rem">⚙️ Build Solutions</span>
+                    <span class="domain-chip" style="font-size:0.85rem">👥 Work with Mentors</span>
+                    <span class="domain-chip" style="font-size:0.85rem">🌐 Network with Innovators</span>
+                    <span class="domain-chip" style="font-size:0.85rem">🎯 Demo Products</span>
+                    <span class="domain-chip" style="font-size:0.85rem">🎤 Pitch to Judges</span>
+                </div>
+            </div>
+
+            <!-- Mode Cards -->
+            <div style="margin-top:4rem">
+                <p class="section-label reveal" style="text-align:center">Participation Modes</p>
+                <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;text-align:center;margin-bottom:0.5rem"
+                    class="reveal">Choose Your <span class="highlight">Journey</span></h3>
+            </div>
+            <div class="mode-grid">
+                <div class="mode-card online reveal">
+                    <div class="mode-icon online">🌐</div>
+                    <h3 class="mode-title">Online Mode</h3>
+                    <ul class="mode-features">
+                        <li><span class="check">✦</span> Attend bootcamps remotely</li>
+                        <li><span class="check">✦</span> Virtual mentorship sessions</li>
+                        <li><span class="check">✦</span> Online project submission</li>
+                        <li><span class="check">✦</span> Remote judging rounds</li>
+                    </ul>
+                </div>
+                <div class="mode-card offline reveal">
+                    <div class="mode-icon offline">🏟️</div>
+                    <h3 class="mode-title">Offline Mode</h3>
+                    <ul class="mode-features">
+                        <li><span class="check" style="color:var(--secondary)">✦</span> Attend the grand finale event
+                        </li>
+                        <li><span class="check" style="color:var(--secondary)">✦</span> Build onsite with your team</li>
+                        <li><span class="check" style="color:var(--secondary)">✦</span> Direct mentor interaction</li>
+                        <li><span class="check" style="color:var(--secondary)">✦</span> Premium networking opportunities
+                        </li>
+                        <li><span class="check" style="color:var(--secondary)">✦</span> Live presentations & demos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ PRIZES ═══════════════ -->
+    <section id="prizes">
+        <div class="container">
+            <div class="trophy">🏆</div>
+            <p class="section-label" style="text-align:center">Rewards</p>
+            <h2 class="section-title reveal" style="text-align:center">Win <span class="highlight">Exciting
+                    Rewards</span></h2>
+            <p class="section-desc reveal" style="margin:0 auto 0;text-align:center">Top performers take home
+                recognition, cash, and career-defining opportunities.</p>
+            <div class="prizes-grid reveal">
+                <div class="prize-chip">💵 Cash Prizes</div>
+                <div class="prize-chip">📜 Certificates</div>
+                <div class="prize-chip">🌟 Recognition</div>
+                <div class="prize-chip">🤝 Networking</div>
+                <div class="prize-chip">💼 Career Exposure</div>
+                <div class="prize-chip">🎖️ Swag & Goodies</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ WHY PARTICIPATE ═══════════════ -->
+    <section id="why">
+        <div class="container">
+            <p class="section-label reveal">Benefits</p>
+            <h2 class="section-title reveal">Why <span class="highlight">Participate?</span></h2>
+            <div class="benefits-grid">
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🎓</div>
+                    <div class="benefit-title">Learn AI from Experts</div>
+                    <div class="benefit-desc">Gain hands-on knowledge from industry leaders and AI practitioners.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🛠️</div>
+                    <div class="benefit-title">Build Real Projects</div>
+                    <div class="benefit-desc">Go beyond theory — create AI solutions that solve actual problems.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🧭</div>
+                    <div class="benefit-title">Industry Mentorship</div>
+                    <div class="benefit-desc">Get 1-on-1 guidance from seasoned professionals and innovators.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🔗</div>
+                    <div class="benefit-title">Networking</div>
+                    <div class="benefit-desc">Connect with like-minded builders, founders, and AI enthusiasts.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-title">Innovation Experience</div>
+                    <div class="benefit-desc">Experience the full innovation lifecycle from idea to demo.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">📋</div>
+                    <div class="benefit-title">Certificates</div>
+                    <div class="benefit-desc">Earn verified certificates of participation and achievement.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🏅</div>
+                    <div class="benefit-title">Recognition</div>
+                    <div class="benefit-desc">Showcase your talent in front of industry judges and leaders.</div>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-title">Career Growth</div>
+                    <div class="benefit-desc">Open doors to internships, jobs, and entrepreneurial ventures.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ FAQ ═══════════════ -->
+    <section id="faq">
+        <div class="container">
+            <p class="section-label" style="text-align:center;display:block" class="reveal">FAQ</p>
+            <h2 class="section-title reveal" style="text-align:center">Frequently Asked <span
+                    class="highlight">Questions</span></h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFAQ(this)">Who can participate? <span
+                            class="faq-icon">+</span></button>
+                    <div class="faq-a">Beacons AI Foundry is open to students, graduates, and early-career professionals
+                        passionate about AI and innovation. Teams of 2–4 members are welcome.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFAQ(this)">Is prior AI experience required? <span
+                            class="faq-icon">+</span></button>
+                    <div class="faq-a">No prior AI experience is required. Our bootcamps are designed to guide complete
+                        beginners through the fundamentals while also challenging experienced participants.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFAQ(this)">Can I participate online? <span
+                            class="faq-icon">+</span></button>
+                    <div class="faq-a">Yes! Module 1 including both bootcamps can be completed fully online. Selected
+                        teams may then attend the Grand Finale offline event.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFAQ(this)">Where is the offline venue? <span
+                            class="faq-icon">+</span></button>
+                    <div class="faq-a">The Grand Finale venue will be announced soon. Stay tuned for updates. Registered
+                        participants will be notified first.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFAQ(this)">Can teams participate? <span
+                            class="faq-icon">+</span></button>
+                    <div class="faq-a">Absolutely! Teams of 2–4 members are encouraged. You can also register
+                        individually and we'll help you find team members during the bootcamps.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ FINAL CTA ═══════════════ -->
+    <section id="final-cta">
+        <div class="cta-aurora">
+            <div class="aurora-blob"></div>
+            <div class="aurora-blob"></div>
+            <div class="aurora-blob"></div>
+        </div>
+        <div class="cta-content">
+            <p class="section-label reveal">The Future Starts Now</p>
+            <h2 class="cta-heading reveal">Ready to Build<br><span class="highlight">the Future?</span></h2>
+            <p class="cta-sub reveal">Join Beacons AI Foundry and transform innovative ideas into impactful AI solutions
+                that shape tomorrow.</p>
+            <button class="btn-primary reveal"
+                style="font-size:1.1rem;padding:1rem 2.8rem;box-shadow:0 0 60px rgba(79,70,229,0.5)">🚀 Register
+                Now</button>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="footer-logo">⬡ Beacons AI Foundry</div>
+                <div class="footer-tagline">Build • Learn • Innovate • Win</div>
+                <p>A premier AI innovation summit where the brightest minds come together to build solutions that
+                    matter.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#module1">Module 1</a></li>
+                    <li><a href="#module2">Grand Finale</a></li>
+                    <li><a href="#prizes">Prizes</a></li>
+                    <li><a href="#why">Why Join</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Twitter / X</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Discord</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">hello@beacons.ai</a></li>
+                    <li><a href="#">Sponsor Us</a></li>
+                    <li><a href="#">Media Kit</a></li>
+                    <li><a href="#">Code of Conduct</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Beacons AI Foundry. All rights reserved.</span>
+            <span>Made with ❤️ for innovators</span>
+        </div>
+    </footer>
+
+    <script type="module" src="app.ts"></script>
+    <script>
+        // ─── STARFIELD ───
+        (function () {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            let W, H, stars = [], shooters = [];
+            function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight }
+            resize();
+            window.addEventListener('resize', resize);
+
+            for (let i = 0; i < 220; i++) {
+                stars.push({ x: Math.random() * 99999, y: Math.random() * 99999, z: Math.random() * 1500 + 200, s: 0 });
+            }
+
+            function addShooter() {
+                shooters.push({ x: Math.random() * W * 0.6, y: Math.random() * H * 0.3, vx: 6 + Math.random() * 4, vy: 2 + Math.random() * 3, life: 1, maxLife: 80 + Math.random() * 40 });
+            }
+
+            setInterval(() => { if (shooters.length < 3) addShooter(); }, 2800);
+
+            let mx = W / 2, my = H / 2;
+            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                const cx = W / 2 + (mx - W / 2) * 0.02, cy = H / 2 + (my - H / 2) * 0.02;
+
+                stars.forEach(s => {
+                    s.z -= 0.4;
+                    if (s.z <= 1) { s.x = Math.random() * 99999; s.y = Math.random() * 99999; s.z = 1500 }
+                    const sx = (s.x - 49999) / s.z * W + cx;
+                    const sy = (s.y - 49999) / s.z * H + cy;
+                    const r = Math.max(0, (1 - s.z / 1500) * 2.2);
+                    const op = Math.max(0, (1 - s.z / 1500) * 0.9);
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${180 + Math.random() * 75},${180 + Math.random() * 75},255,${op})`;
+                    ctx.fill();
+                });
+
+                // Shooting stars
+                shooters.forEach((sh, i) => {
+                    sh.x += sh.vx; sh.y += sh.vy; sh.life--;
+                    if (sh.life <= 0) { shooters.splice(i, 1); return }
+                    const a = sh.life / sh.maxLife;
+                    const grad = ctx.createLinearGradient(sh.x, sh.y, sh.x - sh.vx * 12, sh.y - sh.vy * 12);
+                    grad.addColorStop(0, `rgba(255,255,255,${a})`);
+                    grad.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.beginPath();
+                    ctx.moveTo(sh.x, sh.y);
+                    ctx.lineTo(sh.x - sh.vx * 14, sh.y - sh.vy * 14);
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                });
+
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        // ─── SCROLL REVEAL ───
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target) } });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => io.observe(el));
+
+        // ─── FAQ TOGGLE ───
+        function toggleFAQ(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        // ─── PARALLAX on ecosystem logos ───
+        document.addEventListener('mousemove', e => {
+            const logos = document.querySelectorAll('.eco-logo');
+            const dx = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+            const dy = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+            logos.forEach((el, i) => {
+                const depth = (i % 3 + 1) * 12;
+                const cx = i < 4 ? -1 : 1;
+                el.style.transform = `translateY(calc(var(--fy,0px) + ${dy * depth}px)) translateX(${dx * depth * cx}px)`;
+            });
+        });
+    </script>
+</body>
+
+</html>
