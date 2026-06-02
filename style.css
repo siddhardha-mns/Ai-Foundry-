@@ -1312,9 +1312,10 @@ nav {
 }
 
 .nav-logo-img {
-  height: 36px;
+  height: 60px;
   width: auto;
   object-fit: contain;
+  margin: -12px 0;
 }
 
 .nav-links a {
