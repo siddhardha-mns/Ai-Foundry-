@@ -1053,9 +1053,10 @@
         footer {
             position: relative;
             z-index: 1;
-            border-top: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding: 4rem 2rem 2rem;
-            background: rgba(3, 7, 18, 0.8)
+            background: rgba(248, 250, 252, 0.6);
+            backdrop-filter: blur(10px);
         }
 
         .footer-inner {
@@ -1067,7 +1068,7 @@
         }
 
         .footer-brand p {
-            color: var(--muted);
+            color: var(--text-dark);
             font-size: 0.875rem;
             margin-top: 0.75rem;
             line-height: 1.7
@@ -1076,10 +1077,10 @@
         .footer-col h4 {
             font-family: 'Syne', sans-serif;
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--muted);
+            color: var(--text-dark);
             margin-bottom: 1rem
         }
 
@@ -1091,40 +1092,41 @@
         }
 
         .footer-col ul li a {
-            color: var(--muted);
+            color: var(--text-dark);
             text-decoration: none;
             font-size: 0.875rem;
+            font-weight: 600;
             transition: color 0.2s
         }
 
         .footer-col ul li a:hover {
-            color: var(--text)
+            color: var(--primary)
         }
 
         .footer-bottom {
             max-width: 1100px;
             margin: 3rem auto 0;
             padding-top: 2rem;
-            border-top: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.8rem;
-            color: var(--muted)
+            font-weight: 600;
+            color: var(--text-dark)
         }
 
         .footer-logo {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
             font-size: 1.3rem;
-            background: linear-gradient(135deg, #fff, var(--glow1));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent
+            color: var(--text-dark);
         }
 
         .footer-tagline {
             font-size: 0.75rem;
-            color: var(--muted);
+            color: var(--text-dark);
+            font-weight: 600;
             letter-spacing: 0.1em;
             margin-top: 0.3rem
         }
