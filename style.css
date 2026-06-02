@@ -16,8 +16,8 @@
   --pink: oklch(0.68 0.24 340);       /* prize highlights */
   --green: oklch(0.72 0.21 145);      /* impact highlights */
 
-  --text-dark: oklch(0.20 0.04 250);
-  --text-muted: oklch(0.45 0.03 250);
+  --text-dark: #000000;
+  --text-muted: #000000;
 
   /* Fonts */
   --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
