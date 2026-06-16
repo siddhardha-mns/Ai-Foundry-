@@ -1262,6 +1262,125 @@
             .venue-sub {
                 font-size: 0.9rem;
             }
+
+        /* ─── PARTNERS SECTION ─── */
+        #partners {
+            padding: 3rem 0 2rem;
+        }
+        .partners-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        .partners-section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        .partner-tier {
+            margin-bottom: 2rem;
+        }
+        .partner-tier-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            white-space: nowrap;
+        }
+        .partner-tier-label::before,
+        .partner-tier-label::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 50px;
+            background: rgba(0,75,255,0.15);
+        }
+        .partner-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .partner-logo-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .partner-logo-card:hover {
+            border-color: rgba(139,92,246,0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(79,70,229,0.12);
+        }
+        .partner-logo-card img {
+            display: block;
+            object-fit: contain;
+            max-width: 180px;
+        }
+        .partner-logo-card .p-name {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #64748b;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .partner-collab-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .partner-collab-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .partner-collab-card:hover {
+            border-color: rgba(139,92,246,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(79,70,229,0.1);
+        }
+        .partner-collab-card img {
+            display: block;
+            object-fit: contain;
+        }
+        .partner-collab-card .p-name {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #64748b;
+            text-align: center;
+        }
+        .tier-divider {
+            width: 100%;
+            max-width: 500px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,75,255,0.12), transparent);
+            margin: 0 auto 1.8rem;
+        }
     </style>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -1308,6 +1427,86 @@
         </div>
 
 
+    </section>
+
+    <div class="gradient-divider"></div>
+
+    <!-- ═══════════════ PARTNERS / SPONSORS ═══════════════ -->
+    <section id="partners">
+        <div class="partners-wrap">
+            <p class="partners-section-label reveal">Brought to you by</p>
+
+            <!-- ORGANISER -->
+            <div class="partner-tier reveal">
+                <div class="partner-tier-label">Organised by</div>
+                <div class="partner-logos">
+                    <div class="partner-logo-card">
+                        <img src="/logo_beacon.png" alt="Beacon Technologies" height="52" style="max-width:220px">
+                        <span class="p-name">Beacon Technologies</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-divider"></div>
+
+            <!-- CO-ORGANISER -->
+            <div class="partner-tier reveal">
+                <div class="partner-tier-label">Co-organised by</div>
+                <div class="partner-logos">
+                    <div class="partner-logo-card">
+                        <img src="/logo_devcatalyst.png" alt="DevCatalyst" height="80" style="max-width:280px">
+                        <span class="p-name">DevCatalyst</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-divider"></div>
+
+            <!-- EVENT PARTNERS -->
+            <div class="partner-tier reveal">
+                <div class="partner-tier-label">Event Partners</div>
+                <div class="partner-logos">
+                    <div class="partner-logo-card">
+                        <img src="/logo_gdg.png" alt="Google Developer Groups Hyderabad" height="58" style="max-width:130px">
+                        <span class="p-name">Google Developer Groups<br>Hyderabad</span>
+                    </div>
+                    <div class="partner-logo-card">
+                        <img src="/logo_yanc.png" alt="YANC" height="58" style="max-width:120px">
+                        <span class="p-name">YANC — Young Minds<br>Networking &amp; Life Skills</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-divider"></div>
+
+            <!-- COLLABORATORS -->
+            <div class="partner-tier reveal">
+                <div class="partner-tier-label">Our Collaborators</div>
+                <div class="partner-collab-row">
+                    <div class="partner-collab-card">
+                        <img src="/logo_mobbin.png" alt="Mobbin" height="32" style="max-width:110px">
+                        <span class="p-name">Mobbin</span>
+                    </div>
+                    <div class="partner-collab-card">
+                        <img src="/logo_codecrafters.png" alt="CodeCrafters" height="38" style="max-width:120px">
+                        <span class="p-name">CodeCrafters</span>
+                    </div>
+                    <div class="partner-collab-card">
+                        <img src="/logo_studenttribe.png" alt="Student Tribe" height="52" style="max-width:70px">
+                        <span class="p-name">Student Tribe</span>
+                    </div>
+                    <div class="partner-collab-card">
+                        <img src="/logo_csxia.png" alt="CSXIA" height="52" style="max-width:70px">
+                        <span class="p-name">CSXIA</span>
+                    </div>
+                    <div class="partner-collab-card">
+                        <img src="/logo_thestudentspot.png" alt="The Student Spot" height="52" style="max-width:80px">
+                        <span class="p-name">The Student Spot</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <div class="gradient-divider"></div>

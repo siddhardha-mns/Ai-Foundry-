@@ -1393,3 +1393,150 @@ nav {
   font-weight: 700 !important;
 }
 
+/* ==========================================================================
+   PARTNERS / SPONSORS SECTION  (injected by Antigravity)
+   ========================================================================== */
+#partners {
+  padding: 3rem 0 2rem;
+}
+
+.partners-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.partners-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #004BFF;
+  margin-bottom: 2rem;
+}
+
+.partner-tier {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin-bottom: 2rem;
+}
+
+.partner-tier-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.partner-tier-label::before,
+.partner-tier-label::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 50px;
+  background: rgba(0, 75, 255, 0.18);
+}
+
+.partner-logos {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.partner-logo-card {
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  padding: 0.75rem 1.25rem;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.55rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.partner-logo-card:hover {
+  border-color: rgba(0, 75, 255, 0.18);
+  transform: translateY(-3px);
+}
+
+.partner-logo-card img {
+  display: block;
+  object-fit: contain;
+  max-width: 180px;
+}
+
+.partner-logo-card .p-name {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.partner-collab-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.partner-collab-card {
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.4rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.partner-collab-card:hover {
+  border-color: rgba(0, 75, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.partner-collab-card img {
+  display: block;
+  object-fit: contain;
+}
+
+.partner-collab-card .p-name {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #64748b;
+  text-align: center;
+}
+
+.tier-divider {
+  width: 100%;
+  max-width: 500px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 75, 255, 0.15), transparent);
+  margin: 0 auto 1.8rem;
+}
+
+@media (max-width: 600px) {
+  .partner-logos,
+  .partner-collab-row {
+    gap: 0.75rem;
+  }
+  .partner-logo-card {
+    padding: 0.75rem 1rem;
+  }
+}
