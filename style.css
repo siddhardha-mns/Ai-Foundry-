@@ -1475,6 +1475,11 @@ nav {
   display: block;
   object-fit: contain;
   max-width: 180px;
+}
+
+/* Only monochrome logos get blend mode — colorful logos (GDG, YANC) are excluded */
+.partner-logo-card img.blend-mono,
+.partner-collab-card img.blend-mono {
   mix-blend-mode: multiply;
 }
 
@@ -1515,7 +1520,6 @@ nav {
 .partner-collab-card img {
   display: block;
   object-fit: contain;
-  mix-blend-mode: multiply;
 }
 
 .partner-collab-card .p-name {
