@@ -1475,6 +1475,7 @@ nav {
   display: block;
   object-fit: contain;
   max-width: 180px;
+  mix-blend-mode: multiply;
 }
 
 .partner-logo-card .p-name {
@@ -1514,6 +1515,7 @@ nav {
 .partner-collab-card img {
   display: block;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .partner-collab-card .p-name {
