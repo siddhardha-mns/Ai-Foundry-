@@ -616,103 +616,106 @@
             box-shadow: 0 0 6px var(--accent)
         }
 
-        /* ─── TIMELINE FLOW ─── */
-        .timeline-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-            position: relative;
-            margin: 3rem auto 0;
-            padding: 0 1rem;
+        /* ─── NEW HORIZONTAL TIMELINE ─── */
+        .timeline-scroll-area {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            margin-top: 3rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        @media (min-width: 1024px) {
-            .timeline-flow {
-                flex-direction: row;
-                align-items: stretch;
-                gap: 1.5rem;
-                max-width: 1200px;
-            }
-        }
-        .tl-flow-card {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1.5rem;
-            position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .tl-flow-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 75, 255, 0.1);
-        }
-        .tl-flow-card .day-badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            font-weight: 700;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0, 75, 255, 0.2);
-            font-family: 'Syne', sans-serif;
-        }
-        .tl-flow-card .tl-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: var(--text);
-        }
-        .tl-flow-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            line-height: 1.6;
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-        .tl-flow-card ul li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            flex-direction: column;
-        }
-        .tl-flow-card ul strong {
-            color: var(--primary);
-            font-size: 0.85rem;
-            margin-bottom: 0.1rem;
-        }
-        .tl-flow-card ul span {
-            color: var(--text);
+        .timeline-scroll-area::-webkit-scrollbar {
+            display: none;
         }
         
-        /* The Connecting Arrow */
-        .tl-flow-card:not(:last-child)::after {
-            content: '↓';
-            position: absolute;
-            bottom: -2.3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: bold;
-            opacity: 0.8;
-        }
-        @media (min-width: 1024px) {
-            .tl-flow-card:not(:last-child)::after {
-                content: '→';
-                bottom: auto;
-                top: 50%;
-                left: auto;
-                right: -1.3rem;
-                transform: translateY(-50%);
-                font-size: 1.5rem;
-            }
+        .timeline-flex-row {
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            min-width: max-content;
+            padding: 0 1rem;
         }
 
+        .tl-horiz-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 320px;
+            flex-shrink: 0;
+        }
+
+        /* Connector Line */
+        .tl-horiz-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 0.75rem;
+            left: 2rem;
+            width: calc(100% + 3rem - 1.5rem);
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tl-icon-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+        }
+
+        .tl-horiz-icon {
+            display: flex;
+            height: 1.5rem;
+            width: 1.5rem;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background-color: var(--bg3);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .tl-horiz-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .tl-horiz-title {
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--text);
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .tl-horiz-desc {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+        
+        .tl-horiz-desc strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.1rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tl-horiz-timestamp {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
         /* ─── VENUE CARD ─── */
         .venue-card {
             background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(168, 85, 247, 0.08));
@@ -1552,81 +1555,91 @@
                 <p class="section-label reveal">Journey Roadmap</p>
                 <h2 class="section-title reveal">Hackathon <span class="highlight">Timeline</span></h2>
             </div>
-            <div class="timeline-flow reveal">
-                <!-- DAY 1 -->
-                <div class="tl-flow-card">
-                    <div class="day-badge">Day 1: 18 June</div>
-                    <ul class="tl-events">
-                        <li>
-                            <strong>6:00 PM - 7:00 PM</strong>
-                            <span>Induction & Overview</span>
-                        </li>
-                        <li>
-                            <strong>7:00 PM - 8:30 PM</strong>
-                            <span>Vibe Coding Session</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- DAY 2 -->
-                <div class="tl-flow-card">
-                    <div class="day-badge" style="background: linear-gradient(135deg, var(--secondary), var(--accent)); box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);">Day 2: 19 June</div>
-                    <ul class="tl-events">
-                        <li>
-                            <strong>6:00 PM - 7:15 PM</strong>
-                            <span>Foundations of Modern LLMs</span>
-                        </li>
-                        <li>
-                            <strong>7:30 PM - 8:30 PM</strong>
-                            <span>Agentic AI Session</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="timeline-scroll-area reveal">
+                <div class="timeline-flex-row">
+                    <!-- DAY 1 -->
+                    <div class="tl-horiz-item">
+                        <div class="tl-icon-container">
+                            <div class="tl-horiz-icon" style="background-color: var(--primary); color: white; border-color: var(--primary);">✓</div>
+                        </div>
+                        <div class="tl-horiz-content">
+                            <time class="tl-horiz-timestamp">June 18, 2026</time>
+                            <h3 class="tl-horiz-title">Day 1: Induction</h3>
+                            <div class="tl-horiz-desc">
+                                <strong>6:00 PM - 7:00 PM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Induction Session and Hackathon Overview</span>
+                                
+                                <strong>7:00 PM - 8:30 PM</strong>
+                                <span>Vibe Coding Session</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- DAY 3 -->
-                <div class="tl-flow-card">
-                    <div class="day-badge" style="background: linear-gradient(135deg, var(--accent), #eab308); box-shadow: 0 4px 10px rgba(6, 182, 212, 0.2);">Day 3: 20 June</div>
-                    <ul class="tl-events">
-                        <li>
-                            <strong>10:00 AM - 10:30 AM</strong>
-                            <span>Opening Ceremony</span>
-                        </li>
-                        <li>
-                            <strong>11:00 AM</strong>
-                            <span>Hackathon Officially Begins</span>
-                        </li>
-                        <li>
-                            <strong>1:00 PM - 2:00 PM</strong>
-                            <span>Lunch Break</span>
-                        </li>
-                        <li>
-                            <strong>5:00 PM - 7:00 PM</strong>
-                            <span>Round 1 Evaluations</span>
-                        </li>
-                        <li>
-                            <strong>7:00 PM - 8:30 PM</strong>
-                            <span>Dinner Break</span>
-                        </li>
-                        <li>
-                            <strong>11:00 PM - 12:00 AM</strong>
-                            <span>Fun & Engagement Events</span>
-                        </li>
-                    </ul>
-                </div>
+                    <!-- DAY 2 -->
+                    <div class="tl-horiz-item">
+                        <div class="tl-icon-container">
+                            <div class="tl-horiz-icon" style="border-color: var(--secondary); color: var(--secondary);">⏱</div>
+                        </div>
+                        <div class="tl-horiz-content">
+                            <time class="tl-horiz-timestamp">June 19, 2026</time>
+                            <h3 class="tl-horiz-title">Day 2: Bootcamps</h3>
+                            <div class="tl-horiz-desc">
+                                <strong style="color:var(--secondary)">6:00 PM - 7:15 PM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Foundations of Modern LLMs</span>
+                                
+                                <strong style="color:var(--secondary)">7:30 PM - 8:30 PM</strong>
+                                <span>Agentic AI Session</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- DAY 4 -->
-                <div class="tl-flow-card" style="border-color: var(--accent);">
-                    <div class="day-badge" style="background: linear-gradient(135deg, #eab308, #f59e0b); box-shadow: 0 4px 10px rgba(234, 179, 8, 0.2);">Day 4: 21 June</div>
-                    <ul class="tl-events">
-                        <li>
-                            <strong>7:00 AM - 9:00 AM</strong>
-                            <span>Round 2 Evaluations</span>
-                        </li>
-                        <li>
-                            <strong>9:00 AM - 10:00 AM</strong>
-                            <span>Winners Announcement & Closing Ceremony</span>
-                        </li>
-                    </ul>
+                    <!-- DAY 3 -->
+                    <div class="tl-horiz-item">
+                        <div class="tl-icon-container">
+                            <div class="tl-horiz-icon" style="border-color: var(--accent); color: var(--accent);">⏱</div>
+                        </div>
+                        <div class="tl-horiz-content">
+                            <time class="tl-horiz-timestamp">June 20, 2026</time>
+                            <h3 class="tl-horiz-title">Day 3: The Build</h3>
+                            <div class="tl-horiz-desc">
+                                <strong style="color:var(--accent)">10:00 AM - 10:30 AM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Opening Ceremony</span>
+                                
+                                <strong style="color:var(--accent)">11:00 AM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Hackathon Officially Begins</span>
+                                
+                                <strong style="color:var(--accent)">1:00 PM - 2:00 PM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Lunch Break</span>
+                                
+                                <strong style="color:var(--accent)">5:00 PM - 7:00 PM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Round 1 Evaluations</span>
+                                
+                                <strong style="color:var(--accent)">7:00 PM - 8:30 PM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Dinner Break</span>
+                                
+                                <strong style="color:var(--accent)">11:00 PM - 12:00 AM</strong>
+                                <span>Fun Activities and Engagement Events</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 4 -->
+                    <div class="tl-horiz-item">
+                        <div class="tl-icon-container">
+                            <div class="tl-horiz-icon" style="border-color: #eab308; color: #eab308;">★</div>
+                        </div>
+                        <div class="tl-horiz-content">
+                            <time class="tl-horiz-timestamp">June 21, 2026</time>
+                            <h3 class="tl-horiz-title">Day 4: Finale</h3>
+                            <div class="tl-horiz-desc">
+                                <strong style="color:#eab308">7:00 AM - 9:00 AM</strong>
+                                <span style="display:block;margin-bottom:0.8rem">Round 2 Evaluations</span>
+                                
+                                <strong style="color:#eab308">9:00 AM - 10:00 AM</strong>
+                                <span>Winners Announcement and Closing Ceremony</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
