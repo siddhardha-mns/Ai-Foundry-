@@ -1397,8 +1397,8 @@
         </div>
         <ul class="nav-links">
             <li><a href="#timeline" onclick="document.querySelector('nav').classList.remove('nav-open')">Timeline</a></li>
-            <li><a href="#module1" onclick="document.querySelector('nav').classList.remove('nav-open')">Phase 1</a></li>
-            <li><a href="#module2" onclick="document.querySelector('nav').classList.remove('nav-open')">Phase 2</a></li>
+            <li><a href="#domains" onclick="document.querySelector('nav').classList.remove('nav-open')">Domains</a></li>
+            <li><a href="#details" onclick="document.querySelector('nav').classList.remove('nav-open')">Event Details</a></li>
             <li><a href="#prizes" onclick="document.querySelector('nav').classList.remove('nav-open')">Prizes</a></li>
         </ul>
         <button class="nav-cta" onclick="window.open('https://forms.gle/iNVvUUdy9ew93xya6', '_blank')">Register Now</button>
@@ -1519,32 +1519,60 @@
                 <h2 class="section-title reveal">Hackathon <span class="highlight">Timeline</span></h2>
             </div>
             <div class="timeline" style="margin-top:2rem">
+                <!-- DAY 1 -->
                 <div class="tl-item reveal">
-                    <div class="tl-node">📋</div>
+                    <div class="tl-node" style="font-size: 1.5rem;">📅</div>
                     <div class="tl-content">
-                        <div class="tl-title">Problem Statement Submission</div>
-                        <div class="tl-desc">Identify and submit real-world challenges across domains</div>
+                        <div class="tl-title">Day 1: 18 June 2026</div>
+                        <div class="tl-desc">
+                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
+                                <li><strong style="color:var(--text)">6:00 PM - 7:00 PM:</strong> Induction Session and Hackathon Overview</li>
+                                <li><strong style="color:var(--text)">7:00 PM - 8:30 PM:</strong> Vibe Coding Session</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <!-- DAY 2 -->
                 <div class="tl-item reveal">
-                    <div class="tl-node">🧠</div>
+                    <div class="tl-node" style="font-size: 1.5rem;">🧠</div>
                     <div class="tl-content">
-                        <div class="tl-title">Bootcamp 1</div>
-                        <div class="tl-desc">AI foundations, problem discovery, validation</div>
+                        <div class="tl-title">Day 2: 19 June 2026</div>
+                        <div class="tl-desc">
+                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
+                                <li><strong style="color:var(--text)">6:00 PM - 7:15 PM:</strong> Foundations of Modern LLMs</li>
+                                <li><strong style="color:var(--text)">7:30 PM - 8:30 PM:</strong> Agentic AI Session</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <!-- DAY 3 -->
                 <div class="tl-item reveal">
-                    <div class="tl-node">🛠️</div>
+                    <div class="tl-node" style="font-size: 1.5rem;">🚀</div>
                     <div class="tl-content">
-                        <div class="tl-title">Bootcamp 2</div>
-                        <div class="tl-desc">Build AI products and prepare your pitch</div>
+                        <div class="tl-title">Day 3: 20 June 2026</div>
+                        <div class="tl-desc">
+                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
+                                <li><strong style="color:var(--text)">10:00 AM - 10:30 AM:</strong> Opening Ceremony and Introduction Session</li>
+                                <li><strong style="color:var(--text)">11:00 AM:</strong> Hackathon Officially Begins</li>
+                                <li><strong style="color:var(--text)">1:00 PM - 2:00 PM:</strong> Lunch Break</li>
+                                <li><strong style="color:var(--text)">5:00 PM - 7:00 PM:</strong> Round 1 Evaluations</li>
+                                <li><strong style="color:var(--text)">7:00 PM - 8:30 PM:</strong> Dinner Break</li>
+                                <li><strong style="color:var(--text)">11:00 PM - 12:00 AM:</strong> Fun Activities and Engagement Events</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <!-- DAY 4 -->
                 <div class="tl-item reveal">
-                    <div class="tl-node" style="border-color:var(--accent);box-shadow:0 0 20px rgba(6,182,212,0.4)">🏆</div>
+                    <div class="tl-node" style="border-color:var(--accent);box-shadow:0 0 20px rgba(6,182,212,0.4);font-size: 1.5rem;">🏆</div>
                     <div class="tl-content">
-                        <div class="tl-title" style="color:var(--accent)">Grand Finale</div>
-                        <div class="tl-desc">Offline hackathon — build your solution, pitch, and win</div>
+                        <div class="tl-title" style="color:var(--accent)">Day 4: 21 June 2026</div>
+                        <div class="tl-desc">
+                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
+                                <li><strong style="color:var(--text)">7:00 AM - 9:00 AM:</strong> Round 2 Evaluations</li>
+                                <li><strong style="color:var(--text)">9:00 AM - 10:00 AM:</strong> Winners Announcement and Closing Ceremony</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1553,15 +1581,11 @@
 
     <div class="gradient-divider"></div>
 
-    <!-- ═══════════════ PHASE 1 ═══════════════ -->
-    <section id="module1">
+    <!-- ═══════════════ DOMAINS ═══════════════ -->
+    <section id="domains">
         <div class="container">
-            <p class="section-label reveal">Phase One</p>
-            <h2 class="section-title reveal">Phase 1 — <span class="highlight">Domain Selection & Bootcamps</span></h2>
-            <p class="section-desc reveal">Pick your domain, form your team, and level up with hands-on bootcamps before the grand build.</p>
-
             <!-- Hackathon Domains Card -->
-            <div class="glass-card reveal" style="margin-top:2.5rem">
+            <div class="glass-card reveal" style="margin-top:0">
                 <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.2rem">
                     <span style="font-size:1.4rem">🎯</span>
                     <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700">Hackathon Domains</h3>
@@ -1575,58 +1599,23 @@
                     <span class="domain-chip">🔓 Open Innovation</span>
                 </div>
             </div>
-
-            <!-- Bootcamp Cards -->
-            <div class="bootcamp-grid">
-                <div class="bootcamp-card reveal">
-                    <div class="bc-num">Bootcamp 01</div>
-                    <h3 class="bc-title">Vibe Coding, Git & GitHub</h3>
-                    <ul class="bc-list">
-                        <li>Introduction to vibe coding workflows</li>
-                        <li>Git fundamentals — branching, merging & collaboration</li>
-                        <li>GitHub repositories, PRs & project management</li>
-                        <li>Building & shipping code as a team</li>
-                    </ul>
-                </div>
-                <div class="bootcamp-card reveal" style="animation-delay:0.1s">
-                    <div class="bc-num" style="color:var(--secondary)">Bootcamp 02</div>
-                    <h3 class="bc-title">Agentic AI</h3>
-                    <ul class="bc-list">
-                        <li>Understanding AI agents & autonomous workflows</li>
-                        <li>Building agentic systems with LLMs</li>
-                        <li>Tool use, planning & multi-step reasoning</li>
-                        <li>Real-world agentic AI applications</li>
-                    </ul>
-                </div>
-            </div>
-
-
         </div>
     </section>
 
     <div class="gradient-divider"></div>
 
-    <!-- ═══════════════ PHASE 2 ═══════════════ -->
-    <section id="module2">
+    <!-- ═══════════════ EVENT DETAILS ═══════════════ -->
+    <section id="details">
         <div class="container">
-            <p class="section-label reveal">Phase Two</p>
-            <h2 class="section-title reveal">Phase 2 — Grand <span class="highlight">Finale</span></h2>
-            <p class="section-desc reveal">Selected participants advance to the final offline hackathon — the ultimate
-                test of creativity, skill, and innovation.</p>
-
+            <p class="section-label reveal">Event Details</p>
+            <h2 class="section-title reveal">Venue & <span class="highlight">Modes</span></h2>
+            
             <div class="venue-card reveal" style="margin-top:2.5rem">
                 <div class="venue-label">📍 Event Venue</div>
                 <h3 class="venue-title">IIT Hyderabad</h3>
                 <p class="venue-sub">An immersive, hands-on environment where selected participants come together to
                     build groundbreaking AI solutions over an intense hackathon period.</p>
                 <div class="venue-tba" style="background:rgba(0,75,255,0.08);border-color:rgba(0,75,255,0.25);color:var(--primary)">🏛️ Indian Institute of Technology, Hyderabad</div>
-                <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2rem">
-                    <span class="domain-chip" style="font-size:0.85rem">⚙️ Build Solutions</span>
-                    <span class="domain-chip" style="font-size:0.85rem">👥 Work with Mentors</span>
-                    <span class="domain-chip" style="font-size:0.85rem">🌐 Network with Innovators</span>
-                    <span class="domain-chip" style="font-size:0.85rem">🎯 Demo Products</span>
-                    <span class="domain-chip" style="font-size:0.85rem">🎤 Pitch to Judges</span>
-                </div>
             </div>
 
             <!-- Mode Cards -->
@@ -1768,7 +1757,7 @@
                 <div class="faq-item">
                     <button class="faq-q" onclick="toggleFAQ(this)">Can I participate online? <span
                             class="faq-icon">+</span></button>
-                    <div class="faq-a">Yes! Phase 1 including both bootcamps can be completed fully online. Selected
+                    <div class="faq-a">Yes! Day 1 and Day 2 (Bootcamps) can be completed fully online. Selected
                         teams may then attend the Grand Finale offline event.</div>
                 </div>
                 <div class="faq-item">
