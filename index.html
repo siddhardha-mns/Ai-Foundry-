@@ -616,67 +616,101 @@
             box-shadow: 0 0 6px var(--accent)
         }
 
-        /* ─── TIMELINE ─── */
-        .timeline {
+        /* ─── TIMELINE FLOW ─── */
+        .timeline-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
             position: relative;
-            max-width: 480px;
-            margin: 3rem auto 0
+            margin: 3rem auto 0;
+            padding: 0 1rem;
         }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--accent));
-            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4)
+        @media (min-width: 1024px) {
+            .timeline-flow {
+                flex-direction: row;
+                align-items: stretch;
+                gap: 1.5rem;
+                max-width: 1200px;
+            }
         }
-
-        .tl-item {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            padding: 1rem 0;
-            position: relative
+        .tl-flow-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .tl-node {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg3);
-            border: 2px solid var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.1rem;
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
-            transition: all 0.3s;
-            z-index: 1
+        .tl-flow-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 75, 255, 0.1);
         }
-
-        .tl-node:hover {
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
-            border-color: var(--secondary)
-        }
-
-        .tl-content {
-            padding-top: 0.6rem
-        }
-
-        .tl-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1rem;
+        .tl-flow-card .day-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             font-weight: 700;
-            margin-bottom: 0.2rem
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 75, 255, 0.2);
+            font-family: 'Syne', sans-serif;
         }
-
-        .tl-desc {
+        .tl-flow-card .tl-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+        .tl-flow-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .tl-flow-card ul li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .tl-flow-card ul strong {
+            color: var(--primary);
             font-size: 0.85rem;
-            color: var(--muted); font-weight: 600;
+            margin-bottom: 0.1rem;
+        }
+        .tl-flow-card ul span {
+            color: var(--text);
+        }
+        
+        /* The Connecting Arrow */
+        .tl-flow-card:not(:last-child)::after {
+            content: '↓';
+            position: absolute;
+            bottom: -2.3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            opacity: 0.8;
+        }
+        @media (min-width: 1024px) {
+            .tl-flow-card:not(:last-child)::after {
+                content: '→';
+                bottom: auto;
+                top: 50%;
+                left: auto;
+                right: -1.3rem;
+                transform: translateY(-50%);
+                font-size: 1.5rem;
+            }
         }
 
         /* ─── VENUE CARD ─── */
@@ -1518,62 +1552,81 @@
                 <p class="section-label reveal">Journey Roadmap</p>
                 <h2 class="section-title reveal">Hackathon <span class="highlight">Timeline</span></h2>
             </div>
-            <div class="timeline" style="margin-top:2rem">
+            <div class="timeline-flow reveal">
                 <!-- DAY 1 -->
-                <div class="tl-item reveal">
-                    <div class="tl-node" style="font-size: 1.5rem;">📅</div>
-                    <div class="tl-content">
-                        <div class="tl-title">Day 1: 18 June 2026</div>
-                        <div class="tl-desc">
-                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
-                                <li><strong style="color:var(--text)">6:00 PM - 7:00 PM:</strong> Induction Session and Hackathon Overview</li>
-                                <li><strong style="color:var(--text)">7:00 PM - 8:30 PM:</strong> Vibe Coding Session</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="tl-flow-card">
+                    <div class="day-badge">Day 1: 18 June</div>
+                    <ul class="tl-events">
+                        <li>
+                            <strong>6:00 PM - 7:00 PM</strong>
+                            <span>Induction & Overview</span>
+                        </li>
+                        <li>
+                            <strong>7:00 PM - 8:30 PM</strong>
+                            <span>Vibe Coding Session</span>
+                        </li>
+                    </ul>
                 </div>
+                
                 <!-- DAY 2 -->
-                <div class="tl-item reveal">
-                    <div class="tl-node" style="font-size: 1.5rem;">🧠</div>
-                    <div class="tl-content">
-                        <div class="tl-title">Day 2: 19 June 2026</div>
-                        <div class="tl-desc">
-                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
-                                <li><strong style="color:var(--text)">6:00 PM - 7:15 PM:</strong> Foundations of Modern LLMs</li>
-                                <li><strong style="color:var(--text)">7:30 PM - 8:30 PM:</strong> Agentic AI Session</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="tl-flow-card">
+                    <div class="day-badge" style="background: linear-gradient(135deg, var(--secondary), var(--accent)); box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);">Day 2: 19 June</div>
+                    <ul class="tl-events">
+                        <li>
+                            <strong>6:00 PM - 7:15 PM</strong>
+                            <span>Foundations of Modern LLMs</span>
+                        </li>
+                        <li>
+                            <strong>7:30 PM - 8:30 PM</strong>
+                            <span>Agentic AI Session</span>
+                        </li>
+                    </ul>
                 </div>
+
                 <!-- DAY 3 -->
-                <div class="tl-item reveal">
-                    <div class="tl-node" style="font-size: 1.5rem;">🚀</div>
-                    <div class="tl-content">
-                        <div class="tl-title">Day 3: 20 June 2026</div>
-                        <div class="tl-desc">
-                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
-                                <li><strong style="color:var(--text)">10:00 AM - 10:30 AM:</strong> Opening Ceremony and Introduction Session</li>
-                                <li><strong style="color:var(--text)">11:00 AM:</strong> Hackathon Officially Begins</li>
-                                <li><strong style="color:var(--text)">1:00 PM - 2:00 PM:</strong> Lunch Break</li>
-                                <li><strong style="color:var(--text)">5:00 PM - 7:00 PM:</strong> Round 1 Evaluations</li>
-                                <li><strong style="color:var(--text)">7:00 PM - 8:30 PM:</strong> Dinner Break</li>
-                                <li><strong style="color:var(--text)">11:00 PM - 12:00 AM:</strong> Fun Activities and Engagement Events</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="tl-flow-card">
+                    <div class="day-badge" style="background: linear-gradient(135deg, var(--accent), #eab308); box-shadow: 0 4px 10px rgba(6, 182, 212, 0.2);">Day 3: 20 June</div>
+                    <ul class="tl-events">
+                        <li>
+                            <strong>10:00 AM - 10:30 AM</strong>
+                            <span>Opening Ceremony</span>
+                        </li>
+                        <li>
+                            <strong>11:00 AM</strong>
+                            <span>Hackathon Officially Begins</span>
+                        </li>
+                        <li>
+                            <strong>1:00 PM - 2:00 PM</strong>
+                            <span>Lunch Break</span>
+                        </li>
+                        <li>
+                            <strong>5:00 PM - 7:00 PM</strong>
+                            <span>Round 1 Evaluations</span>
+                        </li>
+                        <li>
+                            <strong>7:00 PM - 8:30 PM</strong>
+                            <span>Dinner Break</span>
+                        </li>
+                        <li>
+                            <strong>11:00 PM - 12:00 AM</strong>
+                            <span>Fun & Engagement Events</span>
+                        </li>
+                    </ul>
                 </div>
+
                 <!-- DAY 4 -->
-                <div class="tl-item reveal">
-                    <div class="tl-node" style="border-color:var(--accent);box-shadow:0 0 20px rgba(6,182,212,0.4);font-size: 1.5rem;">🏆</div>
-                    <div class="tl-content">
-                        <div class="tl-title" style="color:var(--accent)">Day 4: 21 June 2026</div>
-                        <div class="tl-desc">
-                            <ul style="list-style:none; padding:0; margin:0; line-height:1.6; color:var(--muted)">
-                                <li><strong style="color:var(--text)">7:00 AM - 9:00 AM:</strong> Round 2 Evaluations</li>
-                                <li><strong style="color:var(--text)">9:00 AM - 10:00 AM:</strong> Winners Announcement and Closing Ceremony</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="tl-flow-card" style="border-color: var(--accent);">
+                    <div class="day-badge" style="background: linear-gradient(135deg, #eab308, #f59e0b); box-shadow: 0 4px 10px rgba(234, 179, 8, 0.2);">Day 4: 21 June</div>
+                    <ul class="tl-events">
+                        <li>
+                            <strong>7:00 AM - 9:00 AM</strong>
+                            <span>Round 2 Evaluations</span>
+                        </li>
+                        <li>
+                            <strong>9:00 AM - 10:00 AM</strong>
+                            <span>Winners Announcement & Closing Ceremony</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
