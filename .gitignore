@@ -1,3 +1,16 @@
 node_modules/
 dist/
 .DS_Store
+
+# Raw source/WhatsApp images dumped in root
+WhatsApp\ Image\ *.jpeg
+WhatsApp\ Image\ *.jpg
+*.DS_Store
+
+# One-off scripts
+make_transparent*.py
+remove_bg_logos.py
+
+# Editor/OS noise
+.vscode/
+*.log
