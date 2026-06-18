@@ -10,8 +10,13 @@ WhatsApp\ Image\ *.jpg
 # One-off scripts
 make_transparent*.py
 remove_bg_logos.py
+fix_timeline_*.py
+update_timeline*.py
+
 
 # Editor/OS noise
 .vscode/
 *.log
 logo_ai_foundry.jpeg
+PHOTO-*.jpg
+
